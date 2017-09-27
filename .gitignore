@@ -1,0 +1,5 @@
+node_modules/mariasql/build/Release/strings.lib
+obj/
+*.map
+*.js
+bin/Microsoft.NodejsTools.WebRole.dll
