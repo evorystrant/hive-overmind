@@ -1,22 +1,27 @@
 'use strict';
 import * as express from 'express'
-import { Medical } from "./Routes/medical_history"
+import * as bodyParser from 'body-parser';
 import JWT from './Authentication/JWT'
 
 import user_module from './Routes/user';
 
 const app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+JWT.setStrategy(app);
+JWT.setLoginRoute(app);
+
 app.get('/', function (req, res) {
-    res.end("Server is Up!\n")
+    res.end("Server is Up!")
 });
 
 app.use('/API', user_module);
 
-JWT.setStrategy(app);
-JWT.setLoginRoute(app);
-new Medical(app);
-
 app.listen(6060, function () {
     //console.log('its alive!!!!')
+    //app.on("Server Ready");
 });
+
+export default app;

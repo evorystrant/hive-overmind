@@ -2,7 +2,6 @@
 import * as Chai from 'chai';
 import * as Mocha from 'mocha';
 import * as express from 'express';
-import * as _ from 'lodash';
 import User from '../Models/user';
 import * as Moment from 'moment';
 
