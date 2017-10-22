@@ -57,7 +57,7 @@
     <TypeScriptCompile Include="Models\credential.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Models\users.ts" />
+    <TypeScriptCompile Include="Models\user.ts" />
     <TypeScriptCompile Include="Routes\user.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -74,11 +74,6 @@
     <Folder Include="Models\" />
     <Folder Include="views\" />
     <Folder Include="Routes\" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Routes\medical_history.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
