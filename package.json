@@ -1,6 +1,7 @@
 {
     "scripts": {
-        "start": "nodemon entry.js -devmode -something 1"
+        "start": "nodemon entry.js -devmode",
+        "test": "mocha"
     },
     "author": {
         "name": "Evory"

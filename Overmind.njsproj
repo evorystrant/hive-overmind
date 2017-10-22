@@ -67,11 +67,21 @@
     <TypeScriptCompile Include="config.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="test\misc.ts">
+      <SubType>Code</SubType>
+      <TestFramework>Mocha</TestFramework>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="test\user.ts">
+      <SubType>Code</SubType>
+      <TestFramework>Mocha</TestFramework>
+      <Publish>False</Publish>
+    </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBManagers\" />
     <Folder Include="Authentication\" />
     <Folder Include="Models\" />
+    <Folder Include="test\" />
     <Folder Include="views\" />
     <Folder Include="Routes\" />
   </ItemGroup>
