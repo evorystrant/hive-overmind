@@ -21,7 +21,7 @@ router
         async (req, res) =>
             await User.deseliarize(req.body)
                 .create()
-                .catch(error => { console.log("ERRROR!!!!!!!!!!!!!!!!!!!!!", error); res.status(400); res.send({ error: error }) })
+                .catch(error => { console.log(error); res.status(400); res.send({ error: error }) })
                 .then(result => res.json(result))
         )
 

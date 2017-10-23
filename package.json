@@ -1,6 +1,7 @@
 {
     "scripts": {
         "start": "nodemon entry.js -devmode",
+        "build": "make build",
         "test": "mocha"
     },
     "author": {

@@ -14,7 +14,7 @@ let adminToken, ownerToken, userToken;
 
 describe('User', () => {
     before(done => {
-        server = app.listen(3000, done);
+        server = app.listen(4000, done);
     });
 
     it(`Server is up`, done => {
@@ -67,10 +67,10 @@ describe('User', () => {
     // ===================================== CRUD ===================================================
     // ==============================================================================================
 
-    let userTest1_1 = new User(101, `test1`, `test1`, `test1`, `test1`, `test1@test1.test1`, Moment(`2017-02-01T06:00:00.00Z`).utc(false), 1, `03973852-5`, 3);
-    let userTest1_2 = new User(101, `test2`, `test1`, `test2`, `test1`, `test1@test1.test2`, Moment(`2017-02-01T06:00:00.00Z`).utc(false), 1, `03973852-5`, 3);
-    let userTest2_1 = new User(102, `test1`, `test1`, `test2`, `test1`, `test1@test1.test2`, Moment(`2017-02-01T06:00:00.00Z`).utc(false), 1, `03973852-5`, 3);
-    let userTest2_2 = new User(102, `test2`, `test1`, `test2`, `test1`, `test1@test1.test2`, Moment(`2017-02-01T06:00:00.00Z`).utc(false), 1, `03973852-5`, 3);
+    let userTest1_1 = new User(101, `test1`, `test1`, `test1`, `test1`, `test1@test1.test1`, Moment(`2017-02-01`).utc(false), 1, `03973852-5`, 3);
+    let userTest1_2 = new User(101, `test2`, `test1`, `test2`, `test1`, `test1@test1.test2`, Moment(`2017-02-01`).utc(false), 1, `03973852-5`, 3);
+    let userTest2_1 = new User(102, `test1`, `test1`, `test2`, `test1`, `test1@test1.test2`, Moment(`2017-02-01`).utc(false), 1, `03973852-5`, 3);
+    let userTest2_2 = new User(102, `test2`, `test1`, `test2`, `test1`, `test1@test1.test2`, Moment(`2017-02-01`).utc(false), 1, `03973852-5`, 3);
 
     // ===================================== Create =================================================
 
@@ -150,7 +150,6 @@ describe('User', () => {
             .set('Authorization', 'bearer ' + adminToken)
             .send(userTest1_2)
             .end((err, res) => {
-                console.log("result", res.body);
                 Chai.expect(res.status).to.equal(200);
                 Chai.expect(res.body).to.be.equal(`ok`);
                 done();
@@ -163,7 +162,6 @@ describe('User', () => {
             .set('Authorization', 'bearer ' + ownerToken)
             .send(userTest2_2)
             .end((err, res) => {
-                console.log("result", res.body);
                 Chai.expect(res.status).to.equal(200);
                 Chai.expect(res.body).to.be.equal(`ok`);
                 done();

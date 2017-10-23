@@ -44,9 +44,6 @@ export default class User {
     }
 
     static deseliarize(json: any): User {
-        console.log("deserialize - Json", json)
-        console.log("deserialize - Date", Moment('2017-02-01').utc(false).format('Y-M-D hh:mm:ss'))
-        console.log("deserialize - Date", Moment(json.birthdate).utc(false).format('Y-M-D hh:mm:ss'))
         return new User(
             Number.parseInt(json.id),
             json.first_name,
@@ -62,7 +59,6 @@ export default class User {
     }
 
     static newFromQuery(queryRes: any): User {
-        console.log("NEW FROM QUERY", queryRes)
         return new User(
             Number.parseInt(queryRes[USER.ID]),
             queryRes[USER.FIRST_NAME],
@@ -158,7 +154,6 @@ export default class User {
     create(): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             let cnx = MariaDB.getConnection();
-            console.log("CREATE!!!!!", this.birthdate.format('Y-M-D'))
             let ifInsert = this.id == -1 ? `` : `${USER.ID},`
             let ifValue = this.id == -1 ? `` : `${this.id},` 
             cnx.query(`INSERT INTO ${USER.TB_USER_NAME}
@@ -174,20 +169,6 @@ export default class User {
     }
 
     isEqualTo(user: User): boolean {
-        console.log("sure")
-        console.log(this.birthdate.toString())
-        console.log(user.birthdate.toString())
-        console.log(this.birthdate.toString() == user.birthdate.toString())
-        console.log(this.DUI == user.DUI)
-        console.log(this.email == user.email)
-        console.log(this.first_name == user.first_name)
-        console.log(this.middle_name == user.middle_name)
-        console.log(this.first_surname == user.first_surname)
-        console.log(this.second_surname == user.second_surname)
-        console.log(this.Gender == user.Gender)
-        console.log(this.id == user.id)
-        console.log(this.role == user.role)
-        console.log("/sure")
         return this.birthdate.toString() == user.birthdate.toString() &&
             this.DUI == user.DUI &&
             this.email == user.email &&
