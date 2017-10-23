@@ -1,8 +1,8 @@
-﻿import * as passportJwt from 'passport-jwt';
-import * as jsonwebtoken from 'jsonwebtoken';
+﻿import * as passportJwt from "passport-jwt";
+import * as jsonwebtoken from "jsonwebtoken";
 
 export default class Config {
-    public static readonly MARIADB_CONNECTION_INFO: any = 
+    public static readonly MARIADB_CONNECTION_INFO: any =
     {
         "host": "127.0.0.1",
         "port": 3366,
@@ -22,5 +22,5 @@ export default class Config {
         secretOrKey: Config.SECRET,
         jwtFromRequest: passportJwt.ExtractJwt.fromAuthHeaderAsBearerToken(),
         audience: "Testing-Hive"
-    }
+    };
 }

@@ -6,7 +6,7 @@ const server_1 = require("../server");
 let server;
 Chai.use(chaiHttp);
 let adminToken, ownerToken, userToken;
-describe('Misc', () => {
+describe("Misc", () => {
     before(done => {
         server = server_1.default.listen(3000, done);
     });

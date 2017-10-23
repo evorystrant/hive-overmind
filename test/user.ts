@@ -1,18 +1,18 @@
-﻿import chaiHttp = require('chai-http');
-import * as Chai from 'chai';
-import * as Mocha from 'mocha';
-import * as express from 'express';
-import User from '../Models/user';
-import * as Moment from 'moment';
+﻿import chaiHttp = require("chai-http");
+import * as Chai from "chai";
+import * as Mocha from "mocha";
+import * as express from "express";
+import User from "../Models/user";
+import * as Moment from "moment";
 
-import app from '../server';
-let server;
+import app from "../server";
+let server: any;
 
 Chai.use(chaiHttp);
 
-let adminToken, ownerToken, userToken;
+let adminToken: string, ownerToken: string, userToken: string;
 
-describe('User', () => {
+describe("User", () => {
     before(done => {
         server = app.listen(4000, done);
     });
@@ -25,11 +25,11 @@ describe('User', () => {
                 Chai.expect(res.status).to.equal(200);
                 done();
             });
-    })
+    });
 
     // ================================= Authentication ============================================
 
-    it('Authenticate as Admin', done => {
+    it("Authenticate as Admin", done => {
         Chai.request
             .agent(server)
             .post(`/login`)
@@ -40,24 +40,24 @@ describe('User', () => {
                 done();
             });
     });
-    it('Authenticate as Owner', done => {
+    it("Authenticate as Owner", done => {
         Chai.request
             .agent(server)
             .post(`/login`)
             .send({ name: `owner`, password: `owner` })
             .end((err, res) => {
-                Chai.expect(res.status).to.equal(200)
+                Chai.expect(res.status).to.equal(200);
                 ownerToken = res.body.token;
                 done();
             });
     });
-    it('Authenticate as User', done => {
+    it("Authenticate as User", done => {
         Chai.request
             .agent(server)
             .post(`/login`)
             .send({ name: `user`, password: `user` })
             .end((err, res) => {
-                Chai.expect(res.status).to.equal(200)
+                Chai.expect(res.status).to.equal(200);
                 userToken = res.body.token;
                 done();
             });
@@ -82,24 +82,24 @@ describe('User', () => {
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(401);
                 done();
-            })
+            });
     });
-    it('[User] Create User', done => {
+    it("[User] Create User", done => {
         Chai.request
             .agent(server)
             .post(`/API/usuario/`)
-            .set('Authorization', 'bearer ' + userToken)
+            .set("Authorization", "bearer " + userToken)
             .send(userTest1_1)
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(403);
                 done();
             });
     });
-    it('[Admin] Create User', done => {
+    it("[Admin] Create User", done => {
         Chai.request
             .agent(server)
             .post(`/API/usuario`)
-            .set('Authorization', 'bearer ' + adminToken)
+            .set("Authorization", "bearer " + adminToken)
             .send(userTest1_1)
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(200);
@@ -107,11 +107,11 @@ describe('User', () => {
                 done();
             });
     });
-    it('[Owner] Create User', done => {
+    it("[Owner] Create User", done => {
         Chai.request
             .agent(server)
             .post(`/API/usuario/`)
-            .set('Authorization', 'bearer ' + ownerToken)
+            .set("Authorization", "bearer " + ownerToken)
             .send(userTest2_1)
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(200);
@@ -130,24 +130,24 @@ describe('User', () => {
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(401);
                 done();
-            })
+            });
     });
-    it('[User] Update User', done => {
+    it("[User] Update User", done => {
         Chai.request
             .agent(server)
             .put(`/API/usuario/101`)
-            .set('Authorization', 'bearer ' + userToken)
+            .set("Authorization", "bearer " + userToken)
             .send(userTest1_1)
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(403);
                 done();
             });
     });
-    it('[Admin] Update User', done => {
+    it("[Admin] Update User", done => {
         Chai.request
             .agent(server)
             .put(`/API/usuario/101`)
-            .set('Authorization', 'bearer ' + adminToken)
+            .set("Authorization", "bearer " + adminToken)
             .send(userTest1_2)
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(200);
@@ -155,11 +155,11 @@ describe('User', () => {
                 done();
             });
     });
-    it('[Owner] Update User', done => {
+    it("[Owner] Update User", done => {
         Chai.request
             .agent(server)
             .put(`/API/usuario/102`)
-            .set('Authorization', 'bearer ' + ownerToken)
+            .set("Authorization", "bearer " + ownerToken)
             .send(userTest2_2)
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(200);
@@ -177,52 +177,52 @@ describe('User', () => {
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(401);
                 done();
-            })
+            });
     });
-    it('[Admin] Get User', done => {
+    it("[Admin] Get User", done => {
         Chai.request
             .agent(server)
             .get(`/API/usuario/101`)
-            .set('Authorization', 'bearer ' + adminToken)
+            .set("Authorization", "bearer " + adminToken)
             .end((err, res) => {
-                let user = User.deseliarize(res.body)
-                let areEqual = user.isEqualTo(userTest1_2)
+                let user = User.deseliarize(res.body);
+                let areEqual = user.isEqualTo(userTest1_2);
                 Chai.expect(res.status).to.equal(200);
                 Chai.expect(areEqual).to.be.equal(true);
                 done();
             });
     });
-    it('[Owner] Get User', done => {
+    it("[Owner] Get User", done => {
         Chai.request
             .agent(server)
             .get(`/API/usuario/102`)
-            .set('Authorization', 'bearer ' + ownerToken)
+            .set("Authorization", "bearer " + ownerToken)
             .end((err, res) => {
-                let user = User.deseliarize(res.body)
-                let areEqual = user.isEqualTo(userTest2_2)
+                let user = User.deseliarize(res.body);
+                let areEqual = user.isEqualTo(userTest2_2);
                 Chai.expect(res.status).to.equal(200);
                 Chai.expect(areEqual).to.be.equal(true);
                 done();
             });
     });
-    it('[User - Other] Get User', done => {
+    it("[User - Other] Get User", done => {
         Chai.request
             .agent(server)
             .get(`/API/usuario/1`)
-            .set('Authorization', 'bearer ' + userToken)
+            .set("Authorization", "bearer " + userToken)
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(403);
                 done();
             });
     });
-    it('[User - Self] Get User', done => {
+    it("[User - Self] Get User", done => {
         Chai.request
             .agent(server)
             .get(`/API/usuario/3`)
-            .set('Authorization', 'bearer ' + userToken)
+            .set("Authorization", "bearer " + userToken)
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(200);
-                let properties = Object.getOwnPropertyNames(User.default())
+                let properties = Object.getOwnPropertyNames(User.default());
                 Chai.expect(res.body).to.has.all.keys(properties);
                 done();
             });
@@ -237,34 +237,34 @@ describe('User', () => {
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(401);
                 done();
-            })
+            });
     });
-    it('[User] Delete User', done => {
+    it("[User] Delete User", done => {
         Chai.request
             .agent(server)
             .del(`/API/usuario/101`)
-            .set('Authorization', 'bearer ' + userToken)
+            .set("Authorization", "bearer " + userToken)
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(403);
                 done();
             });
     });
-    it('[Admin] Delete User', done => {
+    it("[Admin] Delete User", done => {
         Chai.request
             .agent(server)
             .del(`/API/usuario/101`)
-            .set('Authorization', 'bearer ' + adminToken)
+            .set("Authorization", "bearer " + adminToken)
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(200);
                 Chai.expect(res.body).to.be.equal(`ok`);
                 done();
             });
     });
-    it('[Owner] Delete User', done => {
+    it("[Owner] Delete User", done => {
         Chai.request
             .agent(server)
             .del(`/API/usuario/102`)
-            .set('Authorization', 'bearer ' + ownerToken)
+            .set("Authorization", "bearer " + ownerToken)
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(200);
                 Chai.expect(res.body).to.be.equal(`ok`);
@@ -281,44 +281,44 @@ describe('User', () => {
             .end((err, res) => {
                 Chai.expect(res.status).to.equal(401);
                 done();
-            })
+            });
     });
-    it('[Admin] Get All Users', done => {
+    it("[Admin] Get All Users", done => {
         Chai.request
             .agent(server)
             .get(`/API/usuarios`)
-            .set('Authorization', 'bearer ' + adminToken)
+            .set("Authorization", "bearer " + adminToken)
             .end((err, res) => {
-                Chai.expect(res.status).to.equal(200)
+                Chai.expect(res.status).to.equal(200);
 
-                let body = res.body as Array<any>
+                let body = res.body as Array<any>;
                 Chai.expect(body).to.be.a(`array`);
                 Chai.expect(body.length).to.equal(100);
                 done();
             });
     });
-    it('[Owner] Get All Users', done => {
+    it("[Owner] Get All Users", done => {
         Chai.request
             .agent(server)
             .get(`/API/usuarios`)
-            .set('Authorization', 'bearer ' + ownerToken)
+            .set("Authorization", "bearer " + ownerToken)
             .end((err, res) => {
-                Chai.expect(res.status).to.equal(200)
+                Chai.expect(res.status).to.equal(200);
 
-                let body = res.body as Array<any>
+                let body = res.body as Array<any>;
                 Chai.expect(body).to.be.a(`array`);
                 Chai.expect(body.length).to.equal(100);
                 done();
             });
     });
-    it('[User] Get All Users', done => {
+    it("[User] Get All Users", done => {
         Chai.request
             .agent(server)
             .get(`/API/usuarios`)
-            .set('Authorization', 'bearer ' + userToken)
+            .set("Authorization", "bearer " + userToken)
             .end((err, res) => {
-                Chai.expect(res.status).to.equal(403)
+                Chai.expect(res.status).to.equal(403);
                 done();
             });
     });
-})
+});

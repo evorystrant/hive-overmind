@@ -1,5 +1,5 @@
-﻿import c_config from '../config';
-import * as MariaClient from 'mariaSQL';
+﻿import c_config from "../config";
+import * as MariaClient from "mariaSQL";
 
 export default class MariaDBUtils {
     static getConnection() {

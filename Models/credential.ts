@@ -12,19 +12,19 @@ export default class credentials {
         this.password = password;
         this.role = role;
     }
-    
-    static default(): credentials { return new credentials(0, "", "", 0) }
+
+    static default(): credentials { return new credentials(0, "", "", 0); }
 
     static async getAllCredentials(): Promise<Array<credentials>> {
         return new Promise<credentials[]>(function (resolve, reject) {
             var cnx = MariaDB.getConnection();
             let results: Array<credentials> = [];
             cnx.query(
-                'SELECT u.id_usuario, cl.usuario, cl.password, u.id_rol\
+                "SELECT u.id_usuario, cl.usuario, cl.password, u.id_rol\
                  FROM credencial_local as cl\
-                 JOIN usuario AS u WHERE u.id_usuario = cl.id_usuario'
+                 JOIN usuario AS u WHERE u.id_usuario = cl.id_usuario"
             )
-                .on('result', res =>
+                .on("result", res =>
                     res .on("data", row => results.push(new credentials(row.id_usuario, row.usuario, row.password, row.id_rol)))
                         .on("end", () => resolve(results))
                         .on("error", error => console.dir(error.message) ))
@@ -32,7 +32,7 @@ export default class credentials {
                 .on("end", () => resolve(results));
 
             cnx.end();
-        })
+        });
     }
 
     isUser(id: string | number, password?: string): boolean{
@@ -44,6 +44,6 @@ export default class credentials {
         else {
             return (this.id == id);
         }
-        
+
     }
 }

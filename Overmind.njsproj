@@ -62,6 +62,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="server.ts" />
+    <Content Include="tsconfig.json">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="package.json" />
     <Content Include="README.md" />
     <TypeScriptCompile Include="config.ts">
