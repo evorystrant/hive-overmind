@@ -1,5 +1,4 @@
 *.js
-!node_modules/**/*js
 node_modules/mariasql/build/Release/strings.lib
 obj/
 *.map
