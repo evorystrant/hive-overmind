@@ -25,7 +25,7 @@ export default class credentials {
                  JOIN usuario AS u WHERE u.id_usuario = cl.id_usuario"
             )
                 .on("result", res =>
-                    res .on("data", row => results.push(new credentials(row.id_usuario, row.usuario, row.password, row.id_rol)))
+                    res .on("data", row => results.push(new credentials(row["id_usuario"], row["usuario"], row["password"], row["id_rol"])))
                         .on("end", () => resolve(results))
                         .on("error", error => console.dir(error.message) ))
                 .on("error", error => console.dir(error.message))

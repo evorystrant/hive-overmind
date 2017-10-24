@@ -1,6 +1,6 @@
 *.js
-node_modules/**/*
-node_modules/mariasql/build/Release/strings.lib
+node_modules/*
+!node_modules/\@types
 obj/
 *.map
 bin/Microsoft.NodejsTools.WebRole.dll
