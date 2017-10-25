@@ -1,8 +1,7 @@
 {
     "scripts": {
         "start": "nodemon entry.js -devmode",
-        "test": "mocha",
-        "pretest": "tsc"
+        "test": "mocha"
     },
     "author": {
         "name": "Evory"
